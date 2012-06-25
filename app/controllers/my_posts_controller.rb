@@ -1,4 +1,4 @@
-class MyPostController < ApplicationController
+class MyPostsController < ApplicationController
 
   def post_index
 
@@ -9,14 +9,13 @@ class MyPostController < ApplicationController
   def post_add
 
     @my_post = MyPost.new()
-    @url = post_create_my_post_index_path
-
+    @url = post_create_my_posts_path
   end
 
   def post_create
 
     @my_post = MyPost.new(params[:my_post])
-    @url = post_create_my_post_index_path
+    @url = post_create_my_posts_path
 
       if  @my_post.save
          redirect_to root_path, :notice => 'User was successfully added!!!'
@@ -29,6 +28,8 @@ class MyPostController < ApplicationController
   def post_show
 
     @my_post = MyPost.find(params[:id])
+    @comments = @my_post.comments.all
+
 
   end
 
@@ -47,7 +48,7 @@ class MyPostController < ApplicationController
 
 
     if  @my_post.update_attributes(params[:my_post])
-         redirect_to post_show_my_post_path, :notice => 'User was successfully updated!!!'
+         redirect_to post_show_my_post_path, :notice => 'Post was successfully updated!!!'
       else
          render :action => "post_edit"
       end
@@ -64,6 +65,36 @@ class MyPostController < ApplicationController
 
     redirect_to root_path
   end
+
+  def add_comment
+    @my_post = MyPost.find(params[:id])
+
+
+    @comment = @my_post.comments.new(:comment => params[:text])
+    @comment.save
+    @comments = @my_post.comments.all
+    logger.info @comments.inspect
+
+    respond_to do |format|
+      format.js
+    end
+
+    end
+
+
+
+  #def delete_comment
+  #  @my_posts = MyPost.find(params[:id])
+  #  @comment = @my_posts.comments.all
+  #  @comments = @comments.find(params[:id])
+  #
+  #  if @comments.destroy()
+  #    render :action => "post_show"
+  #  else
+  #    puts "hiiii"
+  #  end
+  #end
+
 
 end
 

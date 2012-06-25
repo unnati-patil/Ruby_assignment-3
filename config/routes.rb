@@ -1,18 +1,21 @@
 Post::Application.routes.draw do
 
 
-  resources :my_post, :except=>[:index,:create, :new, :edit, :show, :update, :destroy ] do
+  resources :my_posts, :except=>[:index,:create, :new, :edit, :show, :update, :destroy ] do
     member do
-      get "post_index"
+     # get "post_index"
       get "post_show"
       get "post_edit"
       put "post_update"
       delete "post_delete"
+      get  "add_comment"
+     # delete "delete_comment"
     end
 
     collection do
-     get "post_add"
-     post "post_create"
+      get "post_index"
+      get "post_add"
+      post "post_create"
     end
 
 
@@ -69,7 +72,7 @@ Post::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'my_post#post_index'
+  root :to => 'my_posts#post_index'
 
   # See how all your routes lay out with "rake routes"
 

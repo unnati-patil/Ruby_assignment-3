@@ -1,0 +1,37 @@
+<p id = "notice" ><%= notice %></p>
+
+<h3>Welcome !!!</h3>
+
+<%= link_to 'Add user', post_add_my_posts_path %>
+
+<br> <br>
+
+<table align = "left" border = "1" cellpadding = "1">
+  <tr>
+    <th> Name        </th>
+    <th>Action1 </th>
+    <th>Action2 </th>
+    <th>Action3 </th>
+    <th>Action4 </th>
+    <th>Action5 </th>
+    <!--<th>Action6 </th> -->
+
+  </tr>
+
+  <% @my_posts.each do |post|%>
+      <tr>
+        <td><%= post.name %></td>
+
+        <td><%= link_to 'Show Post',post_show_my_post_path(post)%> </td>
+        <td><%= link_to 'Edit Post',post_edit_my_post_path(post)%> </td>
+        <td><%= link_to 'Delete Post',post_delete_my_post_path(post), :method => :delete%> </td>
+        <td><%= link_to 'Add Comment',post_show_my_post_path(post)%> </td>
+        <td><%= link_to 'Show Comment',post_show_my_post_path(post)%> </td>
+       <!-- <td><%= link_to 'Delete Comment',post_show_my_post_path(post)%> </td>       -->
+      </tr>
+  <% end %>
+
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<%= will_paginate @my_posts %>

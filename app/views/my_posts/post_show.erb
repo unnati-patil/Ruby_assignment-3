@@ -1,0 +1,43 @@
+
+
+
+<p id = "notice" ><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @my_post.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @my_post.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @my_post.description %>
+</p>
+
+
+
+<br><br><br>
+
+<%= form_for( @my_post.comments.new, :url =>  add_comment_my_post_path) do |i| %>
+    <%= i.label :comment  %><br />
+    <%= i.text_area :comment %> <br>
+     <!-- <%= i.submit %>  -->
+  <input type = button value="Add Comment" id = "add_comment">
+
+<% end %>
+
+<div id="abc" >
+  <%= render :partial => "comment"%>
+</div>
+
+
+
+<br><br>
+
+
+<%= link_to 'Back', root_path %>
+
+

@@ -13,3 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+    $("#add_comment").live("click",function(event)
+    {
+        event.preventDefault();
+        var get_comment = $('#comment_comment').val();
+
+
+        $.get('add_comment', {text :get_comment}, function()
+            {
+
+            });
+    });
+
+});
